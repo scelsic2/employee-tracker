@@ -27,6 +27,7 @@ function init () {
                     connection.query(
                         `SELECT dept_name, dept_id FROM departments ORDER BY dept_name ASC;`,
                         function(err, results, fields) {
+                            console.log("");
                             console.table(results);
                         }
                     )
@@ -35,6 +36,7 @@ function init () {
                     connection.query(
                         `SELECT roles.title, roles.role_id, departments.dept_name, roles.salary FROM departments INNER JOIN roles ON roles.dept_id = departments.dept_id ORDER BY roles.title ASC;`,
                         function(err, results, fields) {
+                            console.log("");
                             console.table(results);
                         }
                     )
@@ -44,6 +46,7 @@ function init () {
                     connection.query(
                         `SELECT employees.emp_id, employees.first_name, employees.last_name, roles.title, departments.dept_name, roles.salary, employees.manager_id FROM employees JOIN ROLES ON employees.role_id = roles.role_id JOIN departments ON roles.dept_id = departments.dept_id ORDER BY employees.last_name ASC;`,
                         function(err, results, fields) {
+                            console.log("");
                             console.table(results);
                         }
                     )
