@@ -69,7 +69,7 @@ function init () {
                    process.exit();
                 }
                 init();
-            });
+            }); 
 }
 
 init();
