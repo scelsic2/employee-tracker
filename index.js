@@ -30,8 +30,8 @@ const startUpChoices = [
 
 function init() {
   inquirer.prompt(startUpChoices).then(async function (userInput) {
-    console.log("You selected:");
-    console.log(userInput.listOfChoices);
+    // console.log("You selected:");
+    // console.log(userInput.listOfChoices);
 
     if (userInput.listOfChoices == "View all Departments") {
       connection.query(
@@ -86,35 +86,82 @@ function init() {
         .promise()
         .query(`SELECT dept_name, dept_id FROM departments;`)
         .then(([choices]) => {
-          console.log(choices);
+          // console.log(choices);
           const formattedChoices = choices.map((choice) => {
-            console.log(choice);
+            console.log([choice.dept_name]);
             return { name: choice.dept_name, value: choice.dept_id };
           });
           return formattedChoices;
         });
       // map returns a new array so that we don't get an object
-      console.log(choices);
-      const addRole = [
-        { name: "roleTitle", message: "Enter a job title:" },
-        { name: "roleSalary", message: "Enter a salary:" },
-        {
-          name: "roleDept",
-          message: "Select the department this job title belongs to:",
-          choices: choices,
-        },
-      ];
-      function roleInit() {
+      // console.log(choices);
+
+      async function roleInit() {
+        const choices = await connection
+        .promise()
+        .query(`SELECT dept_name, dept_id FROM departments;`)
+        .then(([choices]) => {
+          const formattedChoices = choices.map((choice) => {
+            return {name: choice.dept_name, value: choice.dept_id}
+          })
+          return formattedChoices
+        })
+
+        const addRole = [
+          {name: "roleDept",
+          message: "From the choices above, enter a department this role will belong to:"},
+          {name: "roleTitle",
+          message: "Enter a job title:"},
+          {name: "roleSalary",
+            message: "Enter a salary:"},
+  
+        ];
+
         inquirer.prompt(addRole).then(async function (roleInput) {
-          console.log(roleInput); // roleInput.roleDept = 'Jedi Council'
+          console.log(roleInput);
+          
+          const [department] = await connection.promise().query(`SELECT dept_id from DEPARTMENTS WHERE dept_name=?`, [roleInput.roleDept]);
+          console.log(department);
+
+          if (department === false) {
+            console.log("Department not found.");
+            return;
+          }
           console.log("Role " + roleInput.roleTitle + " successfully added.");
-          const [department] = await connection.promise().query(`Select * from departments where dept_id=?`, [roleInput.roleDept])
-          console.log(department)
+          // function matchDept (roleInput) {
+          //   connection.query(`INSERT INTO departments (dept_name) VALUES ("${roleInput.roleDept}")`)
+          // }
+          connection.query(`select dept_id from departments where dept_name = ? `,
+          [roleInput.roleDept], function(err, results, fields) {
+            if(err) {
+              console.log("");
+              console.log("dept lookup error")
+            }
+            else {
+              console.table(results);
+              let dept_id = results[0].dept_id;
+              connection.query(
+                `INSERT INTO roles (title, salary, dept_id) VALUES (?, ? , ?);`,
+                [roleInput.roleTitle, roleInput.roleSalary, dept_id],
+                function (err, results, fields) {
+                  if(err) {
+                    console.log(err);
+                  }
+                  console.log("the last id should be: ");
+                  console.table(results);
+                }
+              );
+
+            }
+
+          })
+          // matchDept()
           // connection.query(
           //   `INSERT INTO roles (title, salary, dept_id) VALUES (?, ? , ?)`,
           //   [roleInput.roleTitle, roleInput.roleSalary, roleInput.roleDept]
           //   );
-            // ("${roleInput.role.Title}", "${roleInput.roleSalary})", "${roleInput.roleDept}";`
+            // ("${roleInput.roleTitle}", "${roleInput.roleSalary})", "${roleInput.roleDept}";`
+
         });
       }
       roleInit();
