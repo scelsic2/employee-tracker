@@ -29,6 +29,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 - https://www.npmjs.com/package/console.table
 - https://www.knowledgehut.com/blog/web-development/node-js-process-exit
 - https://www.w3schools.com/sql/sql_join_self.asp
+- Office Hours 11APR2023
 
 
 ## License

@@ -23,6 +23,7 @@
   "homepage": "https://github.com/scelsic2/employee-tracker#readme",
   "dependencies": {
     "console.table": "^0.10.0",
+    "dotenv": "^16.0.3",
     "inquirer": "^8.2.5",
     "mysql2": "^3.2.0"
   }
