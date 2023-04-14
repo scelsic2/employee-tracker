@@ -64,8 +64,8 @@ inquirer.prompt(startUpChoices)
   // const result = await connection.promise().query(
   //   `SELECT dept_name, dept_id FROM departments ORDER BY dept_name ASC;`
   // )
-
   // console.log(result[0])
+  //
 
 function viewDept() {
   return connection.promise().query(
@@ -173,15 +173,6 @@ function getManager () {
   .catch(err => console.log(err))
 }
 
-// {name: "empManager",
-  //           message: "From the choices below, type in the employee's manager:\n"},
-  //           // type: "list",
-  //           // choices: allManagers},
-  //         {name: "empRole",
-  //           message: "From the choices above, type in the employee's role:\n",},
-  //         { name: "firstName", message: "Enter the employee's first name:" },
-  //         { name: "lastName", message: "Enter the employee's last name:" },
-
 function addEmp () {
   //let roles = null;
   //let managers = null;
@@ -227,10 +218,51 @@ function addEmp () {
 
     })
   });
-  
-
 }
 
+function updateRole() {
+  getRole().then(roleChoices => {
+    //roles = rolesResponse;
+    getManager().then(lastNameChoices => {
+
+      const addEmp = [
+        {type: "list",
+          name: "lastName",
+          message: "Enter the employee's last name:",
+          choices: lastNameChoices},
+        {type: "list",
+          name: "selectRole",
+          message: "Select a new role for the employee:",
+          choices: roleChoices},
+      ]
+
+      inquirer.prompt(addEmp).then(function(userChoices) {
+        connection.promise().query(
+          `SELECT emp_id from employees WHERE last_name=?`, [userChoices.lastName]
+        ).then(employeeResult => {
+          connection.promise().query(
+            `SELECT role_id from roles WHERE title=?`, [userChoices.selectRole]
+          ).then(roleResult => {
+
+            const role_id = roleResult[0][0].role_id;
+            //console.log(role_id)
+
+            const emp_id = employeeResult[0][0].emp_id;
+            return connection.promise().query(
+              `UPDATE employees SET role_id=? WHERE emp_id=?;`, [role_id, emp_id]
+            )
+            .then(res => console.log(userChoices.lastName + "'s role updated successfully"))
+            .catch(err => console.log(err))
+
+          })
+        })
+      });
+
+    })
+  });
+}
+
+// --------------------ATTEMPT ONE--------------------
 // } else if (userInput.listOfChoices == "Add an Employee") {
   //       //async function empInit() {
   //       const empChoices = connection.query(
