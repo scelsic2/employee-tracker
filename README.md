@@ -23,7 +23,7 @@ Run `node index.js` in the terminal access each prompt.
 Result from selecting View Department.
 ![result of view department prompt](./images/s1.png)
 
-Result from selecting Add a Department, the View a Department
+Result from selecting Add a Department, then View a Department
 ![result of add department prompt](./images/s2.png)
 
 View all Employee Roles, Add a Role, and then View again to see updates.
