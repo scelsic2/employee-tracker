@@ -32,7 +32,7 @@ View all Employee Roles, Add a Role, and then View again to see updates.
 View all Employees, Add an Employee, and then View again to see updates.
 ![result of view employees, add an employee, then view employees](./images/s4.png)
 
-View all Employees, Update Employees, then View Employees to see updates.
+View all Employees, Update an Employee, then View all Employees to see updates.
 ![result of view employees, add an employee, then view employees](./images/s5.png)
 
 ## Credits
