@@ -2,26 +2,38 @@
 
 ## Description
 
-<!-- Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn? -->
+View and manage the departments, roles, and employees in your company.
 
 ## Installation
 
-<!-- What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running. -->
+1. Install [Node.js](https://nodejs.org/en).
+2. Clone or fork the [repo](https://github.com/scelsic2/employee-tracker).
+3. Open the repo with VS Code.
+4. Open an integrated terminal in the repo folder.
+5. In the terminal, run `npm init`.
+6. In the terminal, run `npm install inquirer`.
+7. In the terminal, run `npm install mysql2`.
+7. In the terminal, run `npm install console.table`.
 
 ## Usage
 
-<!-- Provide instructions and examples for use. Include screenshots as needed.
+Run `node index.js` in the terminal access each prompt.
+![prompt in terminal](./images/s6.png)
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+Result from selecting View Department.
+![result of view department prompt](./images/s1.png)
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ``` -->
+Result from selecting Add a Department, the View a Department
+![result of add department prompt](./images/s2.png)
+
+View all Employee Roles, Add a Role, and then View again to see updates.
+![result of view roles, add a role, then view roles](./images/s3.png)
+
+View all Employees, Add an Employee, and then View again to see updates.
+![result of view employees, add an employee, then view employees](./images/s4.png)
+
+View all Employees, Update Employees, then View Employees to see updates.
+![result of view employees, add an employee, then view employees](./images/s5.png)
 
 ## Credits
 - https://www.npmjs.com/package/mysql2
@@ -30,6 +42,7 @@ To add a screenshot, create an `assets/images` folder in your repository and upl
 - https://www.knowledgehut.com/blog/web-development/node-js-process-exit
 - https://www.w3schools.com/sql/sql_join_self.asp
 - Office Hours 12APR2023
+- Tutoring 12APR2023
 - Office Hours 13APR2023
 - Tutoring 13APR2023
 
