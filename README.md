@@ -50,6 +50,5 @@ View all Employees, Update an Employee, then View all Employees to see updates.
 
 MIT License
 
-## Deployed Application Link
-<!-- 
-Paste your deployed application link here. -->
+## Walkthrough Link
+https://drive.google.com/file/d/1FbhirnP3gcdt2HQBlH5Jw_xhziyDVpA0/view?usp=sharing 
